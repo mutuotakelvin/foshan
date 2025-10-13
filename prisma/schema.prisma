@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  firstName String?
+  lastName  String?
+  phone     String?
+  address   String?
+  city      String?
+  zipCode   String?
+  userType  String // CUSTOMER or JOB_SEEKER
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  customerProfile  CustomerProfile?
+  jobSeekerProfile JobSeekerProfile?
+  orders          Order[]
+
+  @@map("users")
+}
+
+model CustomerProfile {
+  id                   String  @id @default(cuid())
+  userId               String  @unique
+  newsletterSubscribed Boolean @default(false)
+  totalOrders          Int     @default(0)
+  totalSpent           Float   @default(0)
+  status               String  @default("active") // active, inactive, vip
+  createdAt            DateTime @default(now())
+
+  // Relations
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orders Order[]
+
+  @@map("customer_profiles")
+}
+
+model JobSeekerProfile {
+  id                    String  @id @default(cuid())
+  userId                String  @unique
+  positionInterest      String?
+  experienceLevel       String?
+  availability          String?
+  bio                   String?
+  resumeUrl             String?
+  resumeFileName        String?
+  resumeFileSize        Int?
+  resumeUploadedAt      DateTime?
+  applicationStatus     String  @default("pending") // pending, under_review, approved, rejected, interview_scheduled
+  verificationStatus    String  @default("unverified") // unverified, pending, verified, rejected
+  verificationNotes     String?
+  verifiedAt            DateTime?
+  jobAlerts             Boolean @default(false)
+  canEditApplication    Boolean @default(true)
+  createdAt             DateTime @default(now())
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("job_seeker_profiles")
+}
+
+model Order {
+  id          String   @id @default(cuid())
+  customerId  String
+  userId      String
+  totalAmount Float
+  status      String   @default("pending") // pending, processing, shipped, completed, cancelled
+  createdAt   DateTime @default(now())
+
+  // Relations
+  customer CustomerProfile @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  user     User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("orders")
+}
+
