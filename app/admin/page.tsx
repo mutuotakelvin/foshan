@@ -63,7 +63,7 @@ export default function AdminPage() {
             <Sofa className="h-6 w-6 text-amber-600" />
             <span className="text-xl font-bold text-slate-800 hidden md:block">Heritage Crafted Interiors</span>
           </div>
-          <CardTitle className="text-2xl font-bold text-slate-800">Admin Portal</CardTitle>
+          <h1 className="text-3xl font-bold text-slate-800">compressionsofa Admin Panel</h1>
           <CardDescription className="text-slate-600">Sign in to access the administrative dashboard</CardDescription>
         </CardHeader>
 

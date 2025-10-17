@@ -4,8 +4,8 @@ import "./globals.css"
 import { AuthProvider } from "@/contexts/auth-context"
 
 export const metadata: Metadata = {
-  title: "Heritage Crafted Interiors",
-  description: "Heritage Crafted Interiors is a premier interior design firm specializing in creating timeless and elegant spaces that reflect the rich heritage and craftsmanship of traditional design.",
+  title: "compressionsofa",
+  description: "compressionsofa offers premium compressible sofas and furniture for modern living.",
     generator: 'v0.dev'
 }
 

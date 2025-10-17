@@ -14,101 +14,131 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Sofa, ShoppingBag, Briefcase, Star, Heart, Search, Filter, Menu, User } from "lucide-react"
+import { CartSheet } from "@/components/cart-sheet"
 import { useAuth } from "@/contexts/auth-context"
 import { useUserStore } from "@/store/user-store"
+import { useCartStore } from "@/store/cart-store"
+
+type ProductCard = {
+  id: number
+  name: string
+  price: number
+  image: string
+  category: string
+  rating: number
+  reviews: number
+  badge: string
+  originalPrice?: number
+}
 
 const categories = [
-  { id: "all", name: "All Products", count: 156 },
-  { id: "living-room", name: "Living Room", count: 45 },
-  { id: "bedroom", name: "Bedroom", count: 38 },
-  { id: "dining", name: "Dining Room", count: 28 },
-  { id: "office", name: "Office", count: 22 },
-  { id: "outdoor", name: "Outdoor", count: 15 },
-  { id: "storage", name: "Storage", count: 8 },
+  { id: "all", name: "All Products", count: 10 },
+  { id: "1-seater", name: "1-Seater", count: 2 },
+  { id: "2-seater", name: "2-Seater", count: 2 },
+  { id: "3-seater", name: "3-Seater", count: 2 },
+  { id: "l-sofa", name: "L-Shape / Sectional", count: 2 },
+  { id: "ottomans", name: "Ottomans", count: 2 },
 ]
 
-const products = [
+const products: ProductCard[] = [
   {
     id: 1,
-    name: "Modern Sectional Sofa",
-    price: 1299,
-    originalPrice: 1599,
-    image: "/sofa.jpg",
-    category: "living-room",
-    rating: 4.8,
-    reviews: 124,
-    badge: "Best Seller",
+    name: "S203 1-Seater Compressible Sofa",
+    price: 186,
+    image: "/products/slh_price-010.png",
+    category: "1-seater",
+    rating: 4.6,
+    reviews: 34,
+    badge: "",
   },
   {
     id: 2,
-    name: "Elegant Dining Table",
-    price: 899,
-    image: "/dining.jpg",
-    category: "dining",
-    rating: 4.6,
-    reviews: 89,
-    badge: "New Arrival",
+    name: "S206 1-Seater Compressible Sofa",
+    price: 158,
+    image: "/products/slh_price-012.png",
+    category: "1-seater",
+    rating: 4.5,
+    reviews: 28,
+    badge: "",
   },
   {
     id: 3,
-    name: "Luxury King Bed Frame",
-    price: 1199,
-    originalPrice: 1399,
-    image: "/bed.jpg",
-    category: "bedroom",
-    rating: 4.9,
-    reviews: 156,
-    badge: "Sale",
+    name: "S203 2-Seater Compressible Sofa",
+    price: 257,
+    image: "/products/slh_price-014.png",
+    category: "2-seater",
+    rating: 4.6,
+    reviews: 31,
+    badge: "",
   },
   {
     id: 4,
-    name: "Executive Office Chair",
-    price: 449,
-    image: "/office.jpg",
-    category: "office",
-    rating: 4.7,
-    reviews: 203,
-    badge: "Popular",
+    name: "S206 2-Seater Compressible Sofa",
+    price: 245,
+    image: "/products/slh_price-016.png",
+    category: "2-seater",
+    rating: 4.5,
+    reviews: 26,
+    badge: "",
   },
   {
     id: 5,
-    name: "Rustic Coffee Table",
-    price: 329,
-    image: "/coffee_table.jpg",
-    category: "living-room",
-    rating: 4.5,
-    reviews: 67,
+    name: "S203 3-Seater Compressible Sofa",
+    price: 345,
+    image: "/products/slh_price-018.png",
+    category: "3-seater",
+    rating: 4.7,
+    reviews: 40,
     badge: "",
   },
   {
     id: 6,
-    name: "Modern Wardrobe",
-    price: 799,
-    image: "/wardrobe.png",
-    category: "bedroom",
-    rating: 4.4,
-    reviews: 45,
+    name: "S206 3-Seater Compressible Sofa",
+    price: 330,
+    image: "/products/slh_price-020.png",
+    category: "3-seater",
+    rating: 4.6,
+    reviews: 35,
     badge: "",
   },
   {
     id: 7,
-    name: "Outdoor Patio Set",
-    price: 649,
-    originalPrice: 799,
-    image: "/patio.jpeg",
-    category: "outdoor",
-    rating: 4.6,
-    reviews: 78,
-    badge: "Summer Sale",
+    name: "S206L L-Shape Compressible Sofa",
+    price: 370,
+    image: "/products/slh_price-022.png",
+    category: "l-sofa",
+    rating: 4.8,
+    reviews: 52,
+    badge: "Best Seller",
   },
   {
     id: 8,
-    name: "Storage Ottoman",
-    price: 159,
-    image: "/ottoman.jpg",
-    category: "storage",
-    rating: 4.3,
-    reviews: 34,
+    name: "S210 Modular Sectional (Corner/Armless/Ottoman)",
+    price: 372,
+    image: "/products/slh_price-024.png",
+    category: "l-sofa",
+    rating: 4.7,
+    reviews: 45,
+    badge: "New",
+  },
+  {
+    id: 9,
+    name: "S212 Ottoman",
+    price: 30,
+    image: "/products/slh_price-026.png",
+    category: "ottomans",
+    rating: 4.4,
+    reviews: 22,
+    badge: "",
+  },
+  {
+    id: 10,
+    name: "S217 Ottoman",
+    price: 47,
+    image: "/products/slh_price-028.png",
+    category: "ottomans",
+    rating: 4.5,
+    reviews: 24,
     badge: "",
   },
 ]
@@ -118,6 +148,7 @@ export default function HomePage() {
   const [favorites, setFavorites] = useState<number[]>([])
   const { user, signOut } = useAuth()
   const { profile } = useUserStore()
+  const addToCart = useCartStore((s) => s.addItem)
 
   const filteredProducts =
     selectedCategory === "all" ? products : products.filter((product) => product.category === selectedCategory)
@@ -134,7 +165,7 @@ export default function HomePage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Sofa className="h-8 w-8 text-amber-600" />
-              <span className="text-2xl font-bold text-slate-800 hidden md:block">Heritage Crafted Interiors</span>
+              <span className="text-2xl font-bold text-slate-800 hidden md:block">compressionsofa</span>
             </div>
 
             {/* Search Bar */}
@@ -155,10 +186,7 @@ export default function HomePage() {
                   <Heart className="h-4 w-4 mr-2" />
                   Wishlist
                 </Button>
-                <Button variant="ghost" size="sm">
-                  <ShoppingBag className="h-4 w-4 mr-2" />
-                  Cart (0)
-                </Button>
+                <CartSheet />
                 <div className="flex items-center space-x-2">
                   <span className="text-sm text-slate-600 hidden md:block">
                     Welcome, {profile?.firstName || user.email}
@@ -180,10 +208,7 @@ export default function HomePage() {
                   <Heart className="h-4 w-4 mr-2" />
                   Wishlist
                 </Button>
-                <Button variant="ghost" size="sm">
-                  <ShoppingBag className="h-4 w-4 mr-2" />
-                  Cart (0)
-                </Button>
+                <CartSheet />
 
                 {/* User Type Selection Dialog */}
                 <Dialog>
@@ -210,21 +235,7 @@ export default function HomePage() {
                             </div>
                             <div>
                               <h3 className="font-semibold text-lg">Shop Furniture</h3>
-                              <p className="text-slate-600 text-sm">Browse and purchase premium furniture</p>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </Link>
-
-                      <Link href="/signup/job-seeker">
-                        <Card className="group hover:shadow-lg transition-all duration-300 border-2 hover:border-slate-200 cursor-pointer">
-                          <CardContent className="flex items-center p-6">
-                            <div className="p-3 bg-slate-100 rounded-full mr-4 group-hover:bg-slate-200 transition-colors">
-                              <Briefcase className="h-6 w-6 text-slate-600" />
-                            </div>
-                            <div>
-                              <h3 className="font-semibold text-lg">Join Our Team</h3>
-                              <p className="text-slate-600 text-sm">Explore career opportunities</p>
+                              <p className="text-slate-600 text-sm">Browse and purchase compressionsofa</p>
                             </div>
                           </CardContent>
                         </Card>
@@ -256,7 +267,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="text-center">
             <h1 className="text-5xl font-bold text-slate-800 mb-6">
-              Transform Your Space with <span className="text-amber-600">Premium Furniture</span>
+              Transform Your Space with <span className="text-amber-600">compressionsofa</span>
             </h1>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto mb-8">
               Discover our curated collection of heritage-inspired, elegant, and comfortable furniture pieces designed
@@ -358,9 +369,16 @@ export default function HomePage() {
                           <span className="text-lg text-slate-500 line-through">${product.originalPrice}</span>
                         )}
                       </div>
+                      <Button size="sm" className="bg-amber-600 hover:bg-amber-700"
+                        onClick={(e) => { e.preventDefault(); addToCart({ id: product.id, name: product.name, price: product.price, image: product.image }, 1) }}>
+                        Add
+                      </Button>
                     </div>
 
-                    <Button className="w-full mt-4 bg-amber-600 hover:bg-amber-700">Add to Cart</Button>
+                    <Button className="w-full mt-4 bg-amber-600 hover:bg-amber-700"
+                      onClick={(e) => { e.preventDefault(); addToCart({ id: product.id, name: product.name, price: product.price, image: product.image }, 1) }}>
+                      Add to Cart
+                    </Button>
                   </CardContent>
                 </Card>
               </Link>

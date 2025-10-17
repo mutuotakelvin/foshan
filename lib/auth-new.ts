@@ -321,3 +321,18 @@ export async function updateJobSeekerProfile(userId: string, updates: any) {
     return { data: null, error }
   }
 }
+
+export async function submitJobSeekerForVerification(userId: string): Promise<{ error: any | null }> {
+  try {
+    const updated = await db.jobSeekerProfile.update({
+      where: { userId },
+      data: {
+        verificationStatus: 'pending',
+        canEditApplication: false,
+      },
+    })
+    return { error: null }
+  } catch (error: any) {
+    return { error }
+  }
+}

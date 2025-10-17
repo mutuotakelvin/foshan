@@ -27,7 +27,6 @@ model User {
   // Relations
   customerProfile  CustomerProfile?
   jobSeekerProfile JobSeekerProfile?
-  orders          Order[]
 
   @@map("users")
 }
@@ -43,7 +42,6 @@ model CustomerProfile {
 
   // Relations
   user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  orders Order[]
 
   @@map("customer_profiles")
 }
@@ -74,16 +72,19 @@ model JobSeekerProfile {
 }
 
 model Order {
-  id          String   @id @default(cuid())
-  customerId  String
-  userId      String
-  totalAmount Float
-  status      String   @default("pending") // pending, processing, shipped, completed, cancelled
-  createdAt   DateTime @default(now())
-
-  // Relations
-  customer CustomerProfile @relation(fields: [customerId], references: [id], onDelete: Cascade)
-  user     User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id           String   @id @default(cuid())
+  reference    String   @unique
+  userId       String?
+  email        String
+  amountMinor  Int
+  currency     String   @default("NGN")
+  status       String   @default("pending") // pending | paid | failed | canceled
+  items        String   // JSON string
+  provider     String   @default("paystack")
+  providerRef  String?
+  metadata     String?  // JSON string
+  createdAt    DateTime @default(now())
+  paidAt       DateTime?
 
   @@map("orders")
 }

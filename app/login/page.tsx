@@ -98,7 +98,7 @@ export default function LoginPage() {
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center space-x-2">
               <Sofa className="h-8 w-8 text-slate-800" />
-              <span className="text-2xl font-bold text-slate-800 hidden md:block">Heritage Crafted Interiors</span>
+              <span className="text-2xl font-bold text-slate-800 hidden md:block">compressionsofa</span>
             </Link>
             <Link href="/" className="flex items-center space-x-2 text-slate-600 hover:text-slate-800">
               <ArrowLeft className="h-4 w-4" />
@@ -120,16 +120,12 @@ export default function LoginPage() {
 
             <CardContent>
               <Tabs defaultValue="customer" className="w-full">
-                <TabsList className="grid w-full grid-cols-2 mb-6">
-                  <TabsTrigger value="customer" className="flex items-center space-x-2">
-                    <ShoppingBag className="h-4 w-4" />
-                    <span>Customer</span>
-                  </TabsTrigger>
-                  <TabsTrigger value="job-seeker" className="flex items-center space-x-2">
-                    <Briefcase className="h-4 w-4" />
-                    <span>Job Seeker</span>
-                  </TabsTrigger>
-                </TabsList>
+              <TabsList className="grid w-full grid-cols-1 mb-6">
+                <TabsTrigger value="customer" className="flex items-center space-x-2">
+                  <ShoppingBag className="h-4 w-4" />
+                  <span>Customer</span>
+                </TabsTrigger>
+              </TabsList>
 
                 {message && (
                   <Alert className="mb-4 border-green-200 bg-green-50">
@@ -194,54 +190,7 @@ export default function LoginPage() {
                   </div>
                 </TabsContent>
 
-                <TabsContent value="job-seeker">
-                  <form onSubmit={handleJobSeekerSubmit} className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="jobseeker-email">Email Address</Label>
-                      <Input
-                        id="jobseeker-email"
-                        name="email"
-                        type="email"
-                        value={jobSeekerData.email}
-                        onChange={handleJobSeekerChange}
-                        required
-                        className="h-12"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="jobseeker-password">Password</Label>
-                      <Input
-                        id="jobseeker-password"
-                        name="password"
-                        type="password"
-                        value={jobSeekerData.password}
-                        onChange={handleJobSeekerChange}
-                        required
-                        className="h-12"
-                      />
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <Link href="#" className="text-sm text-slate-600 hover:underline">
-                        Forgot password?
-                      </Link>
-                    </div>
-                    <Button
-                      type="submit"
-                      className="w-full bg-slate-800 hover:bg-slate-900 h-12 text-lg font-semibold"
-                      disabled={isLoading}
-                    >
-                      {isLoading ? "Signing In..." : "Sign In as Job Seeker"}
-                    </Button>
-                  </form>
-                  <div className="text-center mt-4">
-                    <p className="text-slate-600">
-                      Don't have a job seeker account?{" "}
-                      <Link href="/signup/job-seeker" className="text-slate-600 hover:underline font-semibold">
-                        Sign up here
-                      </Link>
-                    </p>
-                  </div>
-                </TabsContent>
+                {/* Job seeker flow removed */}
               </Tabs>
             </CardContent>
           </Card>

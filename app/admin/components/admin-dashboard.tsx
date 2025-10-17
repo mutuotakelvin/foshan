@@ -19,7 +19,6 @@ import {
   UserCheck,
   Send,
 } from "lucide-react"
-import { JobSeekersTab } from "./job-seekers-tab"
 import { ProductsTab } from "./products-tab"
 import { CustomersTab } from "./customers-tab"
 import { SalesTab } from "./sales-tab"
@@ -40,14 +39,6 @@ export function AdminDashboard({ onLogout }: AdminDashboardProps) {
       icon: Users,
       color: "text-blue-600",
       bgColor: "bg-blue-100",
-    },
-    {
-      title: "Job Seekers",
-      value: "156",
-      change: "+8%",
-      icon: Briefcase,
-      color: "text-green-600",
-      bgColor: "bg-green-100",
     },
     {
       title: "Products",
@@ -105,7 +96,7 @@ export function AdminDashboard({ onLogout }: AdminDashboardProps) {
       {/* Main Content */}
       <div className="p-6">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-6 lg:w-fit">
+          <TabsList className="grid w-full grid-cols-5 lg:w-fit">
             <TabsTrigger value="overview" className="flex items-center space-x-2">
               <TrendingUp className="h-4 w-4" />
               <span className="hidden sm:inline">Overview</span>
@@ -113,10 +104,6 @@ export function AdminDashboard({ onLogout }: AdminDashboardProps) {
             <TabsTrigger value="customers" className="flex items-center space-x-2">
               <Users className="h-4 w-4" />
               <span className="hidden sm:inline">Customers</span>
-            </TabsTrigger>
-            <TabsTrigger value="job-seekers" className="flex items-center space-x-2">
-              <Briefcase className="h-4 w-4" />
-              <span className="hidden sm:inline">Job Seekers</span>
             </TabsTrigger>
             <TabsTrigger value="products" className="flex items-center space-x-2">
               <Package className="h-4 w-4" />
@@ -135,7 +122,7 @@ export function AdminDashboard({ onLogout }: AdminDashboardProps) {
           {/* Overview Tab */}
           <TabsContent value="overview" className="space-y-6">
             <div>
-              <h1 className="text-3xl font-bold text-slate-800 mb-2">Dashboard Overview</h1>
+              <h1 className="text-3xl font-bold text-slate-800">compressionsofa Admin</h1>
               <p className="text-slate-600">Monitor your business performance and manage operations</p>
             </div>
 
@@ -186,14 +173,10 @@ export function AdminDashboard({ onLogout }: AdminDashboardProps) {
                   <CardTitle>Quick Actions</CardTitle>
                   <CardDescription>Common administrative tasks</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-3">
+              <CardContent className="space-y-3">
                   <Button className="w-full justify-start" variant="outline">
                     <Plus className="h-4 w-4 mr-2" />
                     Add New Product
-                  </Button>
-                  <Button className="w-full justify-start" variant="outline">
-                    <UserCheck className="h-4 w-4 mr-2" />
-                    Review Job Applications
                   </Button>
                   <Button className="w-full justify-start" variant="outline">
                     <Send className="h-4 w-4 mr-2" />
@@ -212,9 +195,6 @@ export function AdminDashboard({ onLogout }: AdminDashboardProps) {
             <CustomersTab />
           </TabsContent>
 
-          <TabsContent value="job-seekers">
-            <JobSeekersTab />
-          </TabsContent>
 
           <TabsContent value="products">
             <ProductsTab />

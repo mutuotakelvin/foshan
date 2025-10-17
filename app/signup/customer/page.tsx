@@ -113,7 +113,7 @@ export default function CustomerSignup() {
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center space-x-2">
               <Sofa className="h-8 w-8 text-slate-800" />
-              <span className="text-2xl font-bold text-slate-800 hidden md:block">Heritage Crafted Interiors</span>
+              <span className="text-2xl font-bold text-slate-800 hidden md:block">compressionsofa</span>
             </Link>
             <Link href="/" className="flex items-center space-x-2 text-slate-600 hover:text-slate-800">
               <ArrowLeft className="h-4 w-4" />
@@ -132,7 +132,7 @@ export default function CustomerSignup() {
               </div>
               <CardTitle className="text-3xl font-bold text-slate-800">Create Customer Account</CardTitle>
               <CardDescription className="text-lg text-slate-600">
-                Join Heritage Crafted Interiors and start shopping for premium furniture
+                Join Heritage Crafted Interiors and start shopping for compressionsofa
               </CardDescription>
             </CardHeader>
 

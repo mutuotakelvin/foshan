@@ -9,124 +9,398 @@ import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Sofa, ShoppingBag, Heart, Star, Truck, Shield, RotateCcw, Palette, Plus, Minus, Share2 } from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
+import { CartSheet } from "@/components/cart-sheet"
+import { useCartStore } from "@/store/cart-store"
 
 // Extended product data with detailed information
 const productDetails = {
   1: {
     id: 1,
-    name: "Modern Sectional Sofa",
-    price: 1299,
-    originalPrice: 1599,
+    name: "S203 1-Seater Compressible Sofa",
+    price: 186,
+    originalPrice: null,
     images: [
-      "/placeholder.svg?height=600&width=800",
-      "/placeholder.svg?height=600&width=800",
-      "/placeholder.svg?height=600&width=800",
-      "/placeholder.svg?height=600&width=800",
+      "/products/slh_price-010.png",
+      "/products/slh_price-011.png",
     ],
-    category: "living-room",
-    rating: 4.8,
-    reviews: 124,
-    badge: "Best Seller",
+    category: "1-seater",
+    rating: 4.6,
+    reviews: 34,
+    badge: "",
     inStock: true,
-    stockCount: 15,
+    stockCount: 25,
     description:
-      "Transform your living space with our Modern Sectional Sofa, featuring premium comfort and contemporary design. This versatile piece combines style and functionality, perfect for both relaxation and entertaining.",
+      "Single-seat compressible sofa with 35# high-quality foam and fabric upholstery.",
     features: [
-      "Premium high-density foam cushioning",
-      "Durable hardwood frame construction",
-      "Removable and washable cushion covers",
-      "Reversible chaise configuration",
-      "Anti-sag spring system",
-      "Stain-resistant fabric treatment",
+      "35# high-quality compressible foam",
+      "Durable fabric upholstery",
+      "Space-saving packaging",
+      "Comfortable ergonomic seating",
     ],
     specifications: {
-      dimensions: '108" W x 68" D x 35" H',
-      weight: "185 lbs",
-      material: "Polyester blend fabric, hardwood frame",
-      color: "Charcoal Gray",
+      dimensions: "110×92×66 cm",
+      weight: "25 kg",
+      material: "Fabric, compressible foam",
+      color: "Multiple",
       assembly: "Minimal assembly required",
-      warranty: "5-year limited warranty",
+      warranty: "1-year limited warranty",
     },
-    colors: ["Charcoal Gray", "Navy Blue", "Cream White", "Forest Green"],
+    colors: ["Beige", "Gray", "Blue"],
     shipping: {
       freeShipping: true,
-      estimatedDelivery: "5-7 business days",
-      whiteGlove: true,
+      estimatedDelivery: "7-10 business days",
+      whiteGlove: false,
     },
   },
   2: {
     id: 2,
-    name: "Elegant Dining Table",
-    price: 899,
+    name: "S206 1-Seater Compressible Sofa",
+    price: 158,
     originalPrice: null,
     images: [
-      "/placeholder.svg?height=600&width=800",
-      "/placeholder.svg?height=600&width=800",
-      "/placeholder.svg?height=600&width=800",
+      "/products/slh_price-012.png",
+      "/products/slh_price-013.png",
     ],
-    category: "dining",
-    rating: 4.6,
-    reviews: 89,
-    badge: "New Arrival",
+    category: "1-seater",
+    rating: 4.5,
+    reviews: 28,
+    badge: "",
     inStock: true,
-    stockCount: 8,
+    stockCount: 30,
     description:
-      "Elevate your dining experience with our Elegant Dining Table, crafted from premium solid wood with a timeless design that complements any decor style.",
+      "Compact 1-seater with compressible foam for easy transport and storage.",
     features: [
-      "Solid oak wood construction",
-      "Hand-finished with protective coating",
-      "Seats up to 6 people comfortably",
-      "Scratch and water-resistant surface",
-      "Traditional mortise and tenon joinery",
-      "Easy to clean and maintain",
+      "Compressible design",
+      "Stain-resistant fabric",
+      "Supportive seating",
+      "Lightweight construction",
     ],
     specifications: {
-      dimensions: '72" L x 36" W x 30" H',
-      weight: "120 lbs",
-      material: "Solid oak wood",
-      color: "Natural Oak",
-      assembly: "Assembly required",
-      warranty: "3-year limited warranty",
+      dimensions: "120×100×66 cm",
+      weight: "20 kg",
+      material: "Fabric, compressible foam",
+      color: "Multiple",
+      assembly: "Minimal assembly required",
+      warranty: "1-year limited warranty",
     },
-    colors: ["Natural Oak", "Dark Walnut", "White Wash"],
+    colors: ["Charcoal", "Cream", "Green"],
+    shipping: {
+      freeShipping: true,
+      estimatedDelivery: "7-10 business days",
+      whiteGlove: false,
+    },
+  },
+  3: {
+    id: 3,
+    name: "S203 2-Seater Compressible Sofa",
+    price: 257,
+    originalPrice: null,
+    images: [
+      "/products/slh_price-014.png",
+      "/products/slh_price-015.png",
+    ],
+    category: "2-seater",
+    rating: 4.6,
+    reviews: 31,
+    badge: "",
+    inStock: true,
+    stockCount: 18,
+    description:
+      "Two-seat version of S203 for compact living rooms.",
+    features: [
+      "Comfortable for two",
+      "Compressible foam core",
+      "Easy-care fabric",
+      "Reinforced frame",
+    ],
+    specifications: {
+      dimensions: "160×92×66 cm",
+      weight: "38 kg",
+      material: "Fabric, compressible foam",
+      color: "Multiple",
+      assembly: "Minimal assembly required",
+      warranty: "1-year limited warranty",
+    },
+    colors: ["Gray", "Navy", "Beige"],
+    shipping: {
+      freeShipping: true,
+      estimatedDelivery: "7-10 business days",
+      whiteGlove: false,
+    },
+  },
+  4: {
+    id: 4,
+    name: "S206 2-Seater Compressible Sofa",
+    price: 245,
+    originalPrice: null,
+    images: [
+      "/products/slh_price-016.png",
+      "/products/slh_price-017.png",
+    ],
+    category: "2-seater",
+    rating: 4.5,
+    reviews: 26,
+    badge: "",
+    inStock: true,
+    stockCount: 20,
+    description:
+      "Practical 2-seater with supportive compressible foam.",
+    features: [
+      "Compact footprint",
+      "Durable fabric",
+      "Fast setup",
+      "Comfortable seating",
+    ],
+    specifications: {
+      dimensions: "180×100×66 cm",
+      weight: "33 kg",
+      material: "Fabric, compressible foam",
+      color: "Multiple",
+      assembly: "Minimal assembly required",
+      warranty: "1-year limited warranty",
+    },
+    colors: ["Beige", "Gray"],
+    shipping: {
+      freeShipping: true,
+      estimatedDelivery: "7-10 business days",
+      whiteGlove: false,
+    },
+  },
+  5: {
+    id: 5,
+    name: "S203 3-Seater Compressible Sofa",
+    price: 345,
+    originalPrice: null,
+    images: [
+      "/products/slh_price-018.png",
+      "/products/slh_price-019.png",
+    ],
+    category: "3-seater",
+    rating: 4.7,
+    reviews: 40,
+    badge: "",
+    inStock: true,
+    stockCount: 12,
+    description:
+      "Spacious 3-seater with compressible packaging.",
+    features: [
+      "Seats three comfortably",
+      "Supportive foam",
+      "Durable build",
+      "Easy maintenance",
+    ],
+    specifications: {
+      dimensions: "210×92×66 cm",
+      weight: "55 kg",
+      material: "Fabric, compressible foam",
+      color: "Multiple",
+      assembly: "Minimal assembly required",
+      warranty: "1-year limited warranty",
+    },
+    colors: ["Charcoal", "Beige"],
     shipping: {
       freeShipping: true,
       estimatedDelivery: "7-10 business days",
       whiteGlove: true,
     },
   },
-  // Add more products as needed...
+  6: {
+    id: 6,
+    name: "S206 3-Seater Compressible Sofa",
+    price: 330,
+    originalPrice: null,
+    images: [
+      "/products/slh_price-020.png",
+      "/products/slh_price-021.png",
+    ],
+    category: "3-seater",
+    rating: 4.6,
+    reviews: 35,
+    badge: "",
+    inStock: true,
+    stockCount: 14,
+    description:
+      "Large 3-seater with generous depth and supportive foam.",
+    features: [
+      "Spacious seating",
+      "Compressible packaging",
+      "Hard-wearing fabric",
+      "Comfort-first design",
+    ],
+    specifications: {
+      dimensions: "240×100×66 cm",
+      weight: "50 kg",
+      material: "Fabric, compressible foam",
+      color: "Multiple",
+      assembly: "Minimal assembly required",
+      warranty: "1-year limited warranty",
+    },
+    colors: ["Gray", "Blue"],
+    shipping: {
+      freeShipping: true,
+      estimatedDelivery: "7-10 business days",
+      whiteGlove: true,
+    },
+  },
+  7: {
+    id: 7,
+    name: "S206L L-Shape Compressible Sofa",
+    price: 370,
+    originalPrice: null,
+    images: [
+      "/products/slh_price-022.png",
+      "/products/slh_price-023.png",
+    ],
+    category: "l-sofa",
+    rating: 4.8,
+    reviews: 52,
+    badge: "Best Seller",
+    inStock: true,
+    stockCount: 10,
+    description:
+      "L-shaped sectional based on S206 with chaise configuration.",
+    features: [
+      "L-shape configuration",
+      "Compressible modules",
+      "Family-size seating",
+      "Durable upholstery",
+    ],
+    specifications: {
+      dimensions: "280×170×66 cm",
+      weight: "65 kg",
+      material: "Fabric, compressible foam",
+      color: "Multiple",
+      assembly: "Assembly required",
+      warranty: "1-year limited warranty",
+    },
+    colors: ["Gray", "Beige", "Green"],
+    shipping: {
+      freeShipping: true,
+      estimatedDelivery: "7-10 business days",
+      whiteGlove: true,
+    },
+  },
+  8: {
+    id: 8,
+    name: "S210 Modular Sectional (Corner/Armless/Ottoman)",
+    price: 372,
+    originalPrice: null,
+    images: [
+      "/products/slh_price-024.png",
+      "/products/slh_price-025.png",
+    ],
+    category: "l-sofa",
+    rating: 4.7,
+    reviews: 45,
+    badge: "New",
+    inStock: true,
+    stockCount: 9,
+    description:
+      "Modular sectional set with corner, armless, and ottoman modules.",
+    features: [
+      "Modular layout",
+      "Corner and armless pieces",
+      "Included ottoman",
+      "Compressible transport",
+    ],
+    specifications: {
+      dimensions: "Corner 102×102×66 cm; Armless 102×102×66 cm; Ottoman 69×102×38 cm",
+      weight: "55 kg",
+      material: "Fabric, compressible foam",
+      color: "Multiple",
+      assembly: "Assembly required",
+      warranty: "1-year limited warranty",
+    },
+    colors: ["Charcoal", "Cream"],
+    shipping: {
+      freeShipping: true,
+      estimatedDelivery: "7-10 business days",
+      whiteGlove: true,
+    },
+  },
+  9: {
+    id: 9,
+    name: "S212 Ottoman",
+    price: 30,
+    originalPrice: null,
+    images: [
+      "/products/slh_price-026.png",
+      "/products/slh_price-027.png",
+    ],
+    category: "ottomans",
+    rating: 4.4,
+    reviews: 22,
+    badge: "",
+    inStock: true,
+    stockCount: 40,
+    description:
+      "Compressible ottoman for versatile seating and footrest.",
+    features: [
+      "Compact and lightweight",
+      "Durable fabric",
+      "Easy to move",
+      "Space-saving packaging",
+    ],
+    specifications: {
+      dimensions: "84×62×36 cm",
+      weight: "6 kg",
+      material: "Fabric, compressible foam",
+      color: "Multiple",
+      assembly: "No assembly required",
+      warranty: "1-year limited warranty",
+    },
+    colors: ["Gray", "Beige"],
+    shipping: {
+      freeShipping: true,
+      estimatedDelivery: "5-7 business days",
+      whiteGlove: false,
+    },
+  },
+  10: {
+    id: 10,
+    name: "S217 Ottoman",
+    price: 47,
+    originalPrice: null,
+    images: [
+      "/products/slh_price-028.png",
+      "/products/slh_price-029.png",
+    ],
+    category: "ottomans",
+    rating: 4.5,
+    reviews: 24,
+    badge: "",
+    inStock: true,
+    stockCount: 36,
+    description:
+      "Ottoman with compressible core for easy logistics.",
+    features: [
+      "Supportive top",
+      "Sturdy base",
+      "Portable design",
+      "Easy-care fabric",
+    ],
+    specifications: {
+      dimensions: "78×58×39 cm",
+      weight: "7 kg",
+      material: "Fabric, compressible foam",
+      color: "Multiple",
+      assembly: "No assembly required",
+      warranty: "1-year limited warranty",
+    },
+    colors: ["Gray", "Navy"],
+    shipping: {
+      freeShipping: true,
+      estimatedDelivery: "5-7 business days",
+      whiteGlove: false,
+    },
+  },
 }
 
 const relatedProducts = [
-  {
-    id: 3,
-    name: "Luxury King Bed Frame",
-    price: 1199,
-    image: "/placeholder.svg?height=300&width=400",
-    rating: 4.9,
-  },
-  {
-    id: 4,
-    name: "Executive Office Chair",
-    price: 449,
-    image: "/placeholder.svg?height=300&width=400",
-    rating: 4.7,
-  },
-  {
-    id: 5,
-    name: "Rustic Coffee Table",
-    price: 329,
-    image: "/placeholder.svg?height=300&width=400",
-    rating: 4.5,
-  },
-  {
-    id: 6,
-    name: "Modern Wardrobe",
-    price: 799,
-    image: "/placeholder.svg?height=300&width=400",
-    rating: 4.4,
-  },
+  { id: 3, name: "S203 2-Seater Compressible Sofa", price: 257, image: "/products/slh_price-014.png", rating: 4.6 },
+  { id: 5, name: "S203 3-Seater Compressible Sofa", price: 345, image: "/products/slh_price-018.png", rating: 4.7 },
+  { id: 7, name: "S206L L-Shape Compressible Sofa", price: 370, image: "/products/slh_price-022.png", rating: 4.8 },
+  { id: 9, name: "S212 Ottoman", price: 30, image: "/products/slh_price-026.png", rating: 4.4 },
 ]
 
 const reviews = [
@@ -169,6 +443,7 @@ export default function ProductDetailPage() {
   const [selectedColor, setSelectedColor] = useState(product?.colors[0] || "")
   const [quantity, setQuantity] = useState(1)
   const [isFavorite, setIsFavorite] = useState(false)
+  const addToCart = useCartStore((s) => s.addItem)
 
   if (!product) {
     return (
@@ -195,15 +470,12 @@ export default function ProductDetailPage() {
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center space-x-2">
               <Sofa className="h-8 w-8 text-amber-600" />
-              <span className="text-2xl font-bold text-slate-800 hidden md:block">Heritage Crafted Interiors</span>
+              <span className="text-2xl font-bold text-slate-800 hidden md:block">compressionsofa</span>
             </Link>
             <div className="flex items-center space-x-4">
               {user ? (
                 <div className="flex items-center space-x-2">
-                  <Button variant="ghost" size="sm">
-                    <ShoppingBag className="h-4 w-4 mr-2" />
-                    Cart (0)
-                  </Button>
+                  <CartSheet />
                   <Link href="/profile">
                     <Button variant="outline" size="sm">
                       Profile
@@ -370,13 +642,16 @@ export default function ProductDetailPage() {
 
             {/* Action Buttons */}
             <div className="space-y-3">
-              <Button size="lg" className="w-full bg-amber-600 hover:bg-amber-700" disabled={!product.inStock}>
+              <Button size="lg" className="w-full bg-amber-600 hover:bg-amber-700" disabled={!product.inStock}
+                onClick={() => addToCart({ id: product.id, name: product.name, price: product.price, image: product.images[0] }, quantity)}>
                 <ShoppingBag className="h-5 w-5 mr-2" />
                 Add to Cart - ${(product.price * quantity).toLocaleString()}
               </Button>
-              <Button size="lg" variant="outline" className="w-full bg-transparent">
-                Buy Now
-              </Button>
+              <Link href="/checkout">
+                <Button size="lg" variant="outline" className="w-full bg-transparent">
+                  Buy Now
+                </Button>
+              </Link>
             </div>
 
             {/* Shipping Info */}
