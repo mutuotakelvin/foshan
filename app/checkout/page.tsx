@@ -126,6 +126,10 @@ export default function CheckoutPage() {
               <Button className="w-full bg-amber-600 hover:bg-amber-700" onClick={handlePay} disabled={items.length === 0}>
                 Pay with Paystack
               </Button>
+              <p className="text-xs text-slate-500 text-center">
+                By paying, you agree to our {" "}
+                <Link href="/refund-policy" className="text-amber-700 underline">Refund Policy</Link>.
+              </p>
             </CardContent>
           </Card>
         </div>
