@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -277,8 +278,10 @@ export default function HomePage() {
               <Button size="lg" className="bg-amber-600 hover:bg-amber-700 px-8">
                 Shop Now
               </Button>
-              <Button size="lg" variant="outline" className="px-8 bg-transparent">
-                View Catalog
+              <Button asChild size="lg" variant="outline" className="px-8 bg-transparent">
+                <a href="/compression%20sofa%20factory%20Products%20Catalogue-compressed.pdf" download>
+                  View Catalog
+                </a>
               </Button>
             </div>
           </div>
@@ -327,11 +330,14 @@ export default function HomePage() {
               <Link key={product.id} href={`/product/${product.id}`}>
                 <Card className="group hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer">
                   <div className="relative">
-                    <img
+                    <Image
                       src={product.image || "/placeholder.svg"}
                       alt={product.name}
+                      width={800}
+                      height={512}
                       className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      priority={false}
                     />
                     {product.badge && (
                       <Badge className="absolute top-3 left-3 bg-amber-600 hover:bg-amber-600">{product.badge}</Badge>
@@ -433,6 +439,12 @@ export default function HomePage() {
                 <li>Careers</li>
                 <li>Contact</li>
                 <li>Support</li>
+                <li>
+                  <Link href="/refund-policy" className="hover:underline">Refund Policy</Link>
+                </li>
+                <li>
+                  <Link href="/shipping-policy" className="hover:underline">Shipping Policy</Link>
+                </li>
               </ul>
             </div>
             <div>
