@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { useCartStore } from "@/store/cart-store"
 import { ShoppingBag, Trash2, Plus, Minus } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 export function CartSheet() {
   const items = useCartStore((s) => s.items)
@@ -36,7 +37,7 @@ export function CartSheet() {
                   <div key={item.id} className="flex items-center justify-between gap-3 border-b pb-3">
                     <div className="flex items-center gap-3">
                       {item.image && (
-                        <img src={item.image} alt={item.name} className="w-14 h-14 rounded object-cover" />
+                        <Image src={item.image} alt={item.name} width={56} height={56} className="w-14 h-14 rounded object-cover" />
                       )}
                       <div>
                         <div className="font-medium text-slate-800">{item.name}</div>
@@ -71,6 +72,10 @@ export function CartSheet() {
               Checkout
             </Button>
           </Link>
+          <div className="text-xs text-slate-500 text-center">
+            By checking out, you agree to our {" "}
+            <Link href="/refund-policy" className="text-amber-700 underline">Refund Policy</Link>.
+          </div>
         </div>
       </SheetContent>
     </Sheet>
