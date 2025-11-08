@@ -26,6 +26,9 @@ export default function CheckoutSuccess() {
         <>
           <div className="text-green-700 text-xl font-semibold">Payment successful!</div>
           <Link href="/">Go to Home</Link>
+          <p className="text-xs text-slate-500">
+            View our <Link href="/refund-policy" className="text-amber-700 underline">Refund Policy</Link>.
+          </p>
         </>
       )}
       {status === "failed" && (
