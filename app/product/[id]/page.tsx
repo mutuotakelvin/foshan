@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { useParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
@@ -512,10 +513,14 @@ export default function ProductDetailPage() {
           {/* Product Images */}
           <div className="space-y-4">
             <div className="relative">
-              <img
+              <Image
                 src={product.images[selectedImage] || "/placeholder.svg"}
                 alt={product.name}
+                width={1200}
+                height={800}
                 className="w-full h-96 lg:h-[500px] object-cover rounded-lg"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                priority={false}
               />
               {product.badge && <Badge className="absolute top-4 left-4 bg-amber-600">{product.badge}</Badge>}
               <Button
@@ -538,9 +543,11 @@ export default function ProductDetailPage() {
                     selectedImage === index ? "border-amber-600" : "border-slate-200"
                   }`}
                 >
-                  <img
+                  <Image
                     src={image || "/placeholder.svg"}
                     alt={`${product.name} ${index + 1}`}
+                    width={80}
+                    height={80}
                     className="w-full h-full object-cover"
                   />
                 </button>
@@ -674,7 +681,9 @@ export default function ProductDetailPage() {
                 <RotateCcw className="h-5 w-5 text-amber-600" />
                 <div>
                   <p className="font-medium">30-Day Returns</p>
-                  <p className="text-sm text-slate-600">Easy returns and exchanges</p>
+                  <p className="text-sm text-slate-600">Easy returns and exchanges. See our {" "}
+                    <Link href="/refund-policy" className="text-amber-700 underline">Refund Policy</Link>.
+                  </p>
                 </div>
               </div>
             </div>
@@ -819,7 +828,10 @@ export default function ProductDetailPage() {
                       <RotateCcw className="h-5 w-5 text-amber-600 mt-1" />
                       <div>
                         <h4 className="font-medium text-slate-800">30-Day Returns</h4>
-                        <p className="text-slate-600">Return items in original condition within 30 days.</p>
+                        <p className="text-slate-600">Return items in original condition within 30 days. See our {" "}
+                          <Link href="/refund-policy" className="text-amber-700 underline">Refund Policy</Link> and {" "}
+                          <Link href="/shipping-policy" className="text-amber-700 underline">Shipping Policy</Link>.
+                        </p>
                       </div>
                     </div>
                     <div className="flex items-start space-x-3">
@@ -846,10 +858,13 @@ export default function ProductDetailPage() {
               <Link key={relatedProduct.id} href={`/product/${relatedProduct.id}`}>
                 <Card className="group hover:shadow-lg transition-all duration-300">
                   <div className="relative">
-                    <img
+                    <Image
                       src={relatedProduct.image || "/placeholder.svg"}
                       alt={relatedProduct.name}
+                      width={800}
+                      height={480}
                       className="w-full h-48 object-cover rounded-t-lg group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 1024px) 50vw, 25vw"
                     />
                   </div>
                   <CardContent className="p-4">
